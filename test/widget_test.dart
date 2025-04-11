@@ -37,7 +37,7 @@ void main() {
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
-        '/result': (context) => Result(),
+        '/result': (context) => Result(message: '',),
       },
     ));
 

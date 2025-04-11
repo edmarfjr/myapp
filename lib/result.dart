@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
-  Result({super.key});
+  final String message;
 
-  late String message;
+  const Result({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
-    message = (ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>)['resultado'];
-
     return Scaffold(
         appBar: AppBar(
-          title: Text('Resultado'),
+          title: const Text('Resultado'),
         ),
         body: Center(
           child: Text(message),
-        ));
+        ),);
   }
 }
