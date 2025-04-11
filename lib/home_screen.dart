@@ -35,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Navigator.pushNamed(
       context,
-      "/result",
-      arguments: {"resultado": message}   
+      '/result',
+      arguments: {'resultado': message}   
     );
   }
 
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               OutlinedButton(
                 onPressed: calcula,
-                child: Text("Calcular"),
+                child: const Text('Calcular'),
               ),
             ],
           ),

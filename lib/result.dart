@@ -7,7 +7,7 @@ class Result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    message = (ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>)["resultado"];
+    message = (ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>)['resultado'];
 
     return Scaffold(
         appBar: AppBar(
