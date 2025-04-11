@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/home' : (context) => HomeScreen(),
-        '/result' : (context) => const Result(message: '',),
+        '/result' : (context) => Result(),
       },
       initialRoute: '/home',
     );
