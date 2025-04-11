@@ -9,22 +9,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:myapp/main.dart';
+import 'package:myapp/home_screen.dart';
+import 'package:myapp/result.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('App starts correctly and shows HomeScreen', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that HomeScreen is displayed
+    expect(find.byType(HomeScreen), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(find.text('Informe seu peso'), findsOneWidget);
+    expect(find.text('Informe sua Altura'), findsOneWidget);
+    expect(find.text('Calcular'), findsOneWidget);
+  });
+  testWidgets('HomeScreen displays correctly', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: HomeScreen()));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Informe seu peso'), findsOneWidget);
+    expect(find.text('Informe sua Altura'), findsOneWidget);
+    expect(find.text('Calcular'), findsOneWidget);
+  });
+
+  testWidgets('Result is shown correctly after calculation',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/result': (context) => Result(),
+      },
+    ));
+
+    // Enter values in the text fields
+    await tester.enterText(find.byType(TextFormField).at(0), '70');
+    await tester.enterText(find.byType(TextFormField).at(1), '1.68');
+
+    // Tap the 'Calcular' button
+    await tester.tap(find.text('Calcular'));
+    await tester.pumpAndSettle();
+
+    // Verify the result message
+    expect(find.text('Seu IMC: 24.80.  Resultado: Normal'), findsOneWidget);
   });
 }
